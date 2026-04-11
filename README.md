@@ -1,2 +1,2 @@
-# lista-tarefa
+lista-tarefas
 Lista de tarefas
