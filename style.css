@@ -1,48 +1,1525 @@
+/* ==========================================
+   VARIÁVEIS GLOBAIS
+
+   Centraliza todas as cores, sombras e
+   configurações reutilizadas no projeto.
+========================================== */
+
+:root {
+  color-scheme: light;
+
+  /* Fundo principal */
+  --bg: #b798e7;
+
+  /* Cartões */
+  --panel: #FFFFFF;
+
+  /* Textos */
+  --text: #DA70D6;
+  --muted: #9D6CEB;
+
+  /* Bordas */
+  --line: #EADFD7;
+
+/* Cor principal */
+--accent: #BA55D3;
+--accent-strong: #b574c7;
+
+  /* Cores de apoio */
+  --success: #80f397;
+  --warning: #f3cf4d;
+  --danger: #f38989;
+
+  /* Sombras */
+  --shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* ==========================================
+   BODY
+
+   Define a aparência geral da página,
+   incluindo fonte, cores e plano de fundo.
+========================================== */
 
 body {
-  font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #6a11cb, #B0C4DE);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
   margin: 0;
+  min-height: 100vh;
+
+  /* Fonte principal da aplicação */
+  font-family: "Nunito", "Segoe UI", sans-serif;
+
+  /* Suaviza a renderização da fonte */
+-webkit-font-smoothing: antialiased;
+
+  /* Cor padrão dos textos */
+  color: var(--text);
+
+  /* Plano de fundo com detalhes suaves
+     inspirados em papelaria */
+ /* Background = Plano de fundo
+
+   O background aceita várias camadas.
+   Neste projeto utilizamos dois degradês
+   circulares (radial-gradient) sobre a
+   cor principal do fundo.
+*/
+background:
+
+  /* Degradê rosa no canto superior esquerdo */
+  radial-gradient(
+
+    /* Formato do degradê */
+    circle at top left,
+
+    /* Cor inicial */
+    rgba(248, 187, 217, 0.20),
+
+    /* Cor final (transparente) */
+    transparent 35%
+
+  ),
+
+  /* Degradê azul no canto inferior direito */
+  radial-gradient(
+
+    /* Formato do degradê */
+    circle at bottom right,
+
+    /* Cor inicial */
+    rgba(191, 231, 247, 0.20),
+
+    /* Cor final (transparente) */
+    transparent 35%
+
+  ),
+
+  /* Cor principal do fundo */
+  var(--bg);
 }
 
-.container {
-  background: #663399;
-  padding: 20px;
-  border-radius: 10px;
-  width: 300px;
-  text-align: center;
-}
+/* ==========================================
+   COMPONENTES GLOBAIS
 
-input {
-  padding: 10px;
-  width: 70%;
-  margin-right: 5px;
+   Define estilos compartilhados entre
+   botões, campos de entrada (input)
+   e listas de seleção (select).
+========================================== */
+
+button,
+input,
+select {
+
+  /* Font = Fonte
+     Inherit = Herdar
+
+     Faz com que esses elementos utilizem
+     a mesma fonte definida no body.
+  */
+  font: inherit;
+
+    /* Box Sizing = Inclui o padding e a borda
+     dentro da largura do elemento.
+
+     Evita que inputs ultrapassem
+     o espaço disponível.
+  */
+  box-sizing: border-box;
+
 }
 
 button {
-  padding: 10px;
+
+  /* Cursor = Cursor do mouse
+     Pointer = Mãozinha
+
+     Indica ao usuário que o botão
+     pode ser clicado.
+  */
   cursor: pointer;
+
 }
 
-ul {
-  list-style: none;
-  padding: 0;
+/* ==========================================
+   CONTAINER PRINCIPAL
+
+   Organiza os dois painéis da aplicação
+   utilizando CSS Grid.
+========================================== */
+
+.app-shell {
+
+  /* Width = Largura
+
+     Min = Utiliza o menor valor entre
+     as opções informadas.
+
+     Calc = Realiza um cálculo matemático.
+
+     Neste caso:
+     - Máximo de 1120px
+     - Ou largura da tela menos 32px
+  */
+  width: min(1120px, calc(100% - 32px));
+
+  /* Margin = Espaçamento externo
+
+     Auto centraliza o container
+     horizontalmente.
+  */
+  margin: 0 auto;
+
+  /* Padding = Espaçamento interno */
+  padding: 32px 0;
+
+  /* Display = Define como o elemento será exibido
+
+     Grid cria um layout baseado
+     em linhas e colunas.
+  */
+  display: grid;
+
+  /* Grid Template Columns = Define as colunas do Grid
+
+     fr = Fraction (Fração)
+
+     A primeira coluna ocupa menos espaço.
+     A segunda ocupa mais espaço.
+  */
+  grid-template-columns: 0.85fr 1.4fr;
+
+  /* Gap = Espaço entre os elementos */
+  gap: 20px;
+
+  /* Align Items = Alinha os elementos
+     no eixo vertical do Grid.
+  */
+  align-items: start;
+
 }
 
-li {
-  margin-top: 10px;
-  padding: 10px;
-  background: #663399;
+/* ==========================================
+   PAINÉIS
+
+   Define o estilo padrão dos cartões
+   principais da aplicação.
+========================================== */
+
+.panel {
+
+  /* Background = Cor de fundo
+
+     Utiliza a cor definida nas
+     variáveis globais.
+  */
+  background: var(--panel);
+
+  /* Border = Borda
+
+     Cria uma borda suave ao redor
+     do painel.
+  */
+  border: 2px solid var(--line);
+
+  /* Border Radius = Arredondamento dos cantos
+
+     Deixa os painéis com um visual
+     mais moderno e delicado.
+  */
+  border-radius: 24px;
+
+  /* Box Shadow = Sombra
+
+     Adiciona profundidade ao painel,
+     destacando-o do fundo.
+  */
+  box-shadow: var(--shadow);
+
+}
+
+/* ==========================================
+   HERO PANEL
+
+   Painel principal da aplicação que apresenta
+   o título, descrição e progresso das tarefas.
+========================================== */
+
+.hero-panel {
+
+  /* Min Height = Altura mínima
+
+     Garante que o painel tenha pelo
+     menos 420 pixels de altura.
+  */
+  min-height: 420px;
+
+  /* Padding = Espaçamento interno
+
+     Cria um espaço entre o conteúdo
+     e as bordas do painel.
+  */
+  padding: 36px;
+
+  /* Display = Define como o elemento será exibido
+
+     Flex organiza os elementos de forma
+     flexível.
+  */
   display: flex;
+
+  /* Flex Direction = Direção dos elementos
+
+     Column organiza os elementos
+     na vertical.
+  */
+  flex-direction: column;
+
+  /* Justify Content = Distribuição dos elementos
+
+     Space Between coloca um elemento
+     no início e outro no final,
+     distribuindo o espaço restante.
+  */
   justify-content: space-between;
-  align-items: center;
+
+  /* Background = Plano de fundo
+
+     Utiliza um degradê suave para criar
+     um efeito semelhante a uma folha
+     de planner.
+  */
+  background: linear-gradient(
+    180deg,
+    #FFF9FC 0%,
+    #FFFDF8 60%,
+    #FDF8F4 100%
+  );
+
 }
 
-.concluida {
-  text-decoration: line-through;
+/* ==========================================
+   TÍTULO AUXILIAR
+
+   Pequeno texto exibido acima do
+   título principal da aplicação.
+========================================== */
+
+.eyebrow {
+
+  /* Margin = Espaçamento externo */
+  margin: 0 0 12px;
+
+  /* Color = Cor do texto */
+  color: var(--accent);
+
+  /* Font Size = Tamanho da fonte */
+  font-size: 0.78rem;
+
+  /* Font Weight = Espessura da fonte
+
+     Quanto maior o valor,
+     mais "grossa" fica a letra.
+  */
+  font-weight: 800;
+
+  /* Letter Spacing = Espaçamento entre as letras */
+  letter-spacing: 0;
+
+  /* Text Transform = Transformação do texto
+
+     Uppercase deixa todas
+     as letras em maiúsculo.
+  */
+  text-transform: uppercase;
+
+}
+
+/* ==========================================
+   TÍTULO PRINCIPAL
+
+   Exibe o nome da aplicação.
+========================================== */
+
+h1 {
+
+  /* Margin = Espaçamento externo */
+  margin: 0;
+
+  /* Font Size = Tamanho da fonte
+
+     Clamp torna o tamanho responsivo,
+     adaptando-se ao tamanho da tela.
+  */
+  font-size: clamp(2.4rem, 7vw, 4.7rem);
+
+  /* Line Height = Altura entre as linhas */
+  line-height: 0.9;
+
+}
+
+/* ==========================================
+   SUBTÍTULO
+
+   Exibe uma pequena descrição
+   da aplicação.
+========================================== */
+
+.subtitle {
+
+  /* Max Width = Largura máxima */
+  max-width: 360px;
+
+  /* Margin = Espaçamento externo */
+  margin: 18px 0 0;
+
+  /* Color = Cor do texto */
+  color: var(--muted);
+
+  /* Font Size = Tamanho da fonte */
+  font-size: 1.02rem;
+
+  /* Line Height = Altura entre as linhas */
+  line-height: 1.6;
+
+}
+
+/* ==========================================
+   CARD DE PROGRESSO
+
+   Exibe o progresso das tarefas
+   concluídas pelo usuário.
+========================================== */
+
+.progress-card {
+
+  /* Padding = Espaçamento interno
+
+     Cria espaço entre o conteúdo
+     e as bordas do cartão.
+  */
+  padding: 18px;
+
+  /* Border Radius = Arredondamento dos cantos */
+  border-radius: 8px;
+
+  /* Background = Cor de fundo */
+  background:  linear-gradient(
+  135deg,
+  #e0aace,
+  #d3a2e7
+);
+
+  /* Color = Cor do texto */
   color: white;
+
+}
+
+/* ==========================================
+   TEXTO DO PROGRESSO
+
+   Organiza as informações de progresso
+   na horizontal.
+========================================== */
+
+.progress-text {
+
+  /* Display = Define como o elemento será exibido */
+  display: flex;
+
+  /* Justify Content = Distribui os elementos
+     no eixo principal.
+  */
+  justify-content: space-between;
+
+  /* Gap = Espaço entre os elementos */
+  gap: 16px;
+
+  /* Margin Bottom = Espaçamento externo inferior */
+  margin-bottom: 12px;
+
+}
+
+/* ==========================================
+   TEXTO SECUNDÁRIO DO PROGRESSO
+========================================== */
+
+.progress-text span {
+
+  /* Color = Cor do texto */
+  color: white;
+
+}
+
+/* ==========================================
+   CONTADOR DE TAREFAS
+========================================== */
+
+.progress-text strong {
+
+  /* Font Size = Tamanho da fonte */
+  font-size: 1.4rem;
+
+}
+
+/* ==========================================
+   BARRA DE PROGRESSO
+
+   Define a estrutura da barra
+   onde o progresso será exibido.
+========================================== */
+
+.progress-track {
+
+  /* Height = Altura */
+  height: 10px;
+
+  /* Overflow = Controla o conteúdo
+     que ultrapassa o tamanho do elemento.
+
+     Hidden oculta qualquer conteúdo
+     que ultrapasse a barra.
+  */
+  overflow: hidden;
+
+  /* Border Radius = Arredondamento dos cantos 999px cria um formato totalmente
+   arredondado, semelhante a uma cápsula.*/
+  border-radius: 999px;
+
+  /* Background = Cor de fundo */
+  background: white;
+
+}
+
+/* ==========================================
+   PROGRESSO PREENCHIDO
+
+   Representa a parte preenchida
+   da barra de progresso.
+========================================== */
+
+.progress-track span {
+
+  /* Display = Define como o elemento será exibido */
+  display: block;
+
+  /* Width = Largura
+
+     Será alterada dinamicamente
+     pelo JavaScript.
+  */
+  width: 0%;
+
+  /* Height = Altura */
+  height: 100%;
+
+  /* Border Radius = Arredondamento dos cantos */
+  border-radius: inherit;
+
+  /* Background = Cor de fundo */
+  background: #52d6b2;
+
+  /* Transition = Animação entre mudanças
+
+     Width = propriedade animada
+
+     0.25s = duração
+
+     Ease = movimento suave
+  */
+  transition: width .25s ease;
+
+}
+
+/* ==========================================
+   PAINEL DE TAREFAS
+
+   Contém o formulário, filtros,
+   estatísticas e lista de tarefas.
+========================================== */
+
+.task-panel {
+
+  /* Padding = Espaçamento interno */
+  padding: 22px;
+
+}
+
+/* ==========================================
+   FORMULÁRIO
+
+   Organiza os campos de cadastro
+   utilizando CSS Grid.
+========================================== */
+
+.task-form {
+
+  /* Display = Define como o elemento será exibido
+
+     Grid organiza os elementos em
+     linhas e colunas.
+  */
+  display: grid;
+
+  /* Grid Template Columns = Define as colunas do Grid
+
+     Minmax = Define um tamanho mínimo
+     e máximo para a coluna.
+
+     1fr = Ocupa o espaço restante.
+
+     Auto = Ajusta a largura conforme
+     o conteúdo.
+  */
+  grid-template-columns:
+    minmax(220px, 1fr)
+    140px
+    170px
+    auto;
+
+  /* Gap = Espaço entre os elementos */
+  gap: 12px;
+
+  /* Align Items = Alinhamento no eixo secundário */
+  align-items: end;
+
+}
+
+/* ==========================================
+   CAMPO DO FORMULÁRIO
+
+   Organiza o label e o campo
+   correspondente.
+========================================== */
+
+.field {
+
+  /* Display = Define como o elemento será exibido */
+  display: grid;
+
+  /* Gap = Espaço entre o label
+     e o campo */
+  gap: 7px;
+
+}
+
+/* ==========================================
+   LABEL
+
+   Texto que identifica cada
+   campo do formulário.
+========================================== */
+
+label {
+
+  /* Color = Cor do texto */
+  color: var(--muted);
+
+  /* Font Size = Tamanho da fonte */
+  font-size: .82rem;
+
+  /* Font Weight = Espessura da fonte */
+  font-weight: 700;
+
+}
+
+/* ==========================================
+   CAMPOS DE ENTRADA
+
+   Estilo compartilhado pelos
+   inputs e listas de seleção.
+========================================== */
+
+input,
+select {
+
+  /* Width = Largura */
+  width: 100%;
+
+  /* Min Height = Altura mínima */
+  min-height: 46px;
+
+  /* Border = Borda */
+  border: 1px solid var(--line);
+
+  /* Border Radius = Arredondamento dos cantos */
+  border-radius: 8px;
+
+  /* Padding = Espaçamento interno */
+  padding: 0 12px;
+
+  /* Color = Cor do texto */
+  color: var(--text);
+
+  /* Background = Cor de fundo */
+  background: var(--panel);
+
+  /* Outline = Contorno do foco
+
+     None remove o contorno padrão
+     do navegador.
+  */
+  outline: none;
+
+}
+
+/* ==========================================
+   CAMPOS EM FOCO
+
+   Estilo aplicado quando o usuário
+   seleciona um campo.
+========================================== */
+
+input:focus,
+select:focus {
+
+  /* Border Color = Cor da borda */
+  border-color: var(--accent);
+
+  /* Box Shadow = Sombra
+
+     Cria um destaque suave ao redor
+     do campo selecionado.
+  */
+  box-shadow: 0 0 0 3px rgba(23, 107, 135, .13);
+
+}
+
+/* ==========================================
+   BOTÕES
+
+   Estilos compartilhados entre os
+   botões da aplicação.
+========================================== */
+
+.primary-button,
+.ghost-button,
+.filter-button,
+.icon-button {
+
+  /* Min Height = Altura mínima */
+  min-height: 42px;
+
+  /* Border = Borda
+
+     0 remove a borda padrão
+     do navegador.
+  */
+  border: 0;
+
+  /* Border Radius = Arredondamento dos cantos */
+  border-radius: 8px;
+
+  /* Font Weight = Espessura da fonte */
+  font-weight: 800;
+
+}
+
+/* ==========================================
+   BOTÃO PRINCIPAL
+
+   Utilizado para adicionar
+   novas tarefas.
+========================================== */
+
+.primary-button {
+
+  /* Min Height = Altura mínima */
+  min-height: 46px;
+
+  /* Padding = Espaçamento interno */
+  padding: 0 18px;
+
+  /* Color = Cor do texto */
+  color: #fff;
+
+  /* Background = Cor de fundo */
+  background: var(--accent);
+
+}
+
+/* ==========================================
+   BOTÃO PRINCIPAL (HOVER)
+
+   Estilo aplicado quando o usuário
+   passa o mouse sobre o botão.
+========================================== */
+
+.primary-button:hover {
+
+  /* Background = Cor de fundo */
+  background: var(--accent-strong);
+
+}
+
+/* ==========================================
+   BOTÃO FANTASMA
+
+   Utilizado para ações secundárias,
+   como limpar tarefas concluídas.
+========================================== */
+
+.ghost-button {
+
+  /* Padding = Espaçamento interno */
+  padding: 0 14px;
+
+  /* Color = Cor do texto */
+  color: var(--accent-strong);
+
+  /* Background = Cor de fundo */
+  background: #F3E8FD;
+  color: #ba7ed6;
+
+}
+
+/* ==========================================
+   BOTÃO DE FILTRO
+
+   Permite filtrar as tarefas
+   exibidas na lista.
+========================================== */
+
+.filter-button {
+
+  /* Padding = Espaçamento interno */
+  padding: 0 12px;
+
+  /* Color = Cor do texto */
+  color: var(--muted);
+
+  /* Background = Cor de fundo */
+  background: transparent;
+
+}
+
+/* ==========================================
+   FILTRO ATIVO
+
+   Destaca o filtro atualmente
+   selecionado.
+========================================== */
+
+.filter-button.active {
+
+  /* Color = Cor do texto */
+  color: #fff;
+
+  /* Background = Cor de fundo */
+  background: var(--text);
+
+}
+
+/* ==========================================
+   BOTÃO DE AÇÃO
+
+   Utilizado para editar e excluir
+   tarefas.
+========================================== */
+
+.icon-button {
+
+  /* Width = Largura */
+  width: 58px;
+
+  /* Color = Cor do texto */
+  color: var(--muted);
+
+  /* Background = Cor de fundo */
+  background: #F3E8FD;
+
+  /* Font Size = Tamanho da fonte */
+  font-size: .78rem;
+
+}
+
+/* ==========================================
+   BOTÃO DE AÇÃO (HOVER)
+
+   Destaca o botão quando o usuário
+   passa o mouse sobre ele.
+========================================== */
+
+.icon-button:hover {
+
+  /* Color = Cor do texto */
+  color: white;
+
+  /* Background = Cor de fundo */
+  background: #9D6CEB;
+
+}
+
+/* ==========================================
+   BARRA DE FERRAMENTAS
+
+   Organiza os filtros e o botão
+   de limpar tarefas concluídas.
+========================================== */
+
+.toolbar {
+
+  /* Margin Top = Espaçamento externo superior */
+  margin-top: 20px;
+
+  /* Display = Define como o elemento será exibido
+
+     Flex organiza os elementos
+     horizontalmente.
+  */
+  display: flex;
+
+  /* Justify Content = Distribui os elementos
+     no eixo principal.
+  */
+  justify-content: space-between;
+
+  /* Gap = Espaço entre os elementos */
+  gap: 12px;
+
+  /* Flex Wrap = Permite que os elementos
+     quebrem para a próxima linha quando
+     não houver espaço suficiente.
+  */
+  flex-wrap: wrap;
+
+}
+
+/* ==========================================
+   GRUPO DE FILTROS
+
+   Agrupa os botões utilizados
+   para filtrar as tarefas.
+========================================== */
+
+.filters {
+
+  /* Display = Define como o elemento será exibido */
+  display: flex;
+
+  /* Gap = Espaço entre os botões */
+  gap: 6px;
+
+  /* Padding = Espaçamento interno */
+  padding: 4px;
+
+  /* Border = Borda */
+  border: 1px solid var(--line);
+
+  /* Border Radius = Arredondamento dos cantos */
+  border-radius: 8px;
+
+  /* Background = Cor de fundo */
+  background: #f8fafc;
+
+}
+
+/* ==========================================
+   PAINEL DE ESTATÍSTICAS
+
+   Organiza os cartões de resumo
+   utilizando CSS Grid.
+========================================== */
+
+.stats-grid {
+
+  /* Margin Top = Espaçamento externo superior */
+  margin-top: 18px;
+
+  /* Display = Define como o elemento será exibido */
+  display: grid;
+
+  /* Grid Template Columns = Define a quantidade
+     e o tamanho das colunas.
+
+     Repeat = Repete o mesmo padrão.
+
+     1fr = Cada coluna ocupa
+     a mesma quantidade de espaço.
+  */
+  grid-template-columns: repeat(3, 1fr);
+
+  /* Gap = Espaço entre os cartões */
+  gap: 10px;
+
+}
+
+/* ==========================================
+   CARTÃO DE ESTATÍSTICA
+
+   Exibe uma informação resumida
+   sobre as tarefas.
+========================================== */
+
+.stats-grid article {
+
+  /* Padding = Espaçamento interno */
+  padding: 14px;
+
+  /* Border = Borda */
+  border: 1px solid var(--line);
+
+  /* Border Radius = Arredondamento dos cantos */
+  border-radius: 8px;
+
+  /* Background = Cor de fundo */
+  background: #FCF8FF;
+
+}
+
+/* ==========================================
+   TÍTULO DA ESTATÍSTICA
+========================================== */
+
+.stats-grid span {
+
+  /* Display = Define como o elemento será exibido */
+  display: block;
+
+  /* Color = Cor do texto */
+  color: var(--muted);
+
+  /* Font Size = Tamanho da fonte */
+  font-size: .78rem;
+
+  /* Font Weight = Espessura da fonte */
+  font-weight: 700;
+
+}
+
+/* ==========================================
+   VALOR DA ESTATÍSTICA
+========================================== */
+
+.stats-grid strong {
+
+  /* Display = Define como o elemento será exibido */
+  display: block;
+
+  /* Margin Top = Espaçamento externo superior */
+  margin-top: 6px;
+
+  /* Font Size = Tamanho da fonte */
+  font-size: 1.6rem;
+
+}
+
+/* ==========================================
+   LISTA DE TAREFAS
+
+   Container responsável por organizar
+   todas as tarefas cadastradas.
+========================================== */
+
+.task-list {
+
+  /* List Style = Estilo da lista
+
+     None remove os marcadores
+     (bolinhas) da lista.
+  */
+  list-style: none;
+
+  /* Margin = Espaçamento externo */
+  margin: 18px 0 0;
+
+  /* Padding = Espaçamento interno */
+  padding: 0;
+
+  /* Display = Define como o elemento será exibido
+
+     Grid organiza as tarefas
+     em uma única coluna.
+  */
+  display: grid;
+
+  /* Gap = Espaço entre as tarefas */
+  gap: 10px;
+
+}
+
+/* ==========================================
+   CARD DA TAREFA
+
+   Define a aparência de cada tarefa
+   exibida na lista.
+========================================== */
+
+.task-item {
+
+  /* Display = Define como o elemento será exibido */
+  display: grid;
+
+  /* Grid Template Columns = Define as colunas
+
+     Primeira coluna → Botão de conclusão
+
+     Segunda coluna → Conteúdo
+
+     Terceira coluna → Botões de ação
+  */
+  grid-template-columns: auto 1fr auto;
+
+  /* Gap = Espaço entre as colunas */
+  gap: 12px;
+
+  /* Align Items = Alinha os elementos
+     verticalmente.
+  */
+  align-items: center;
+
+  /* Padding = Espaçamento interno */
+  padding: 14px;
+
+  /* Border = Borda */
+  border: 1px solid var(--line);
+
+  /* Border Radius = Arredondamento dos cantos */
+  border-radius: 8px;
+
+  /* Background = Cor de fundo */
+  background: var(--panel);
+
+}
+
+/* ==========================================
+   TAREFA CONCLUÍDA
+
+   Estilo aplicado quando a tarefa
+   é marcada como concluída.
+========================================== */
+
+.task-item.done {
+
+  /* Background = Cor de fundo */
+  background: #f5f7fa;
+
+}
+
+/* ==========================================
+   TEXTO DA TAREFA CONCLUÍDA
+========================================== */
+
+.task-item.done .task-title {
+
+  /* Color = Cor do texto */
+  color: var(--muted);
+
+  /* Text Decoration = Decoração do texto
+
+     Line Through adiciona um risco
+     sobre o texto.
+  */
+  text-decoration: line-through;
+
+}
+
+/* ==========================================
+   BOTÃO DE CONCLUSÃO
+
+   Permite marcar uma tarefa
+   como concluída.
+========================================== */
+
+.check-button {
+
+  /* Width = Largura */
+  width: 28px;
+
+  /* Height = Altura */
+  height: 28px;
+
+  /* Border = Borda */
+  border: 2px solid var(--line);
+
+  /* Border Radius = Arredondamento dos cantos
+
+     50% transforma o botão
+     em um círculo.
+  */
+  border-radius: 50%;
+
+  /* Background = Cor de fundo */
+  background: var(--panel);
+
+}
+
+/* ==========================================
+   BOTÃO CONCLUÍDO
+========================================== */
+
+.task-item.done .check-button {
+
+  /* Border Color = Cor da borda */
+  border-color: var(--success);
+
+  /* Background = Cor de fundo */
+  background: var(--success);
+
+}
+
+/* ==========================================
+   CONTEÚDO DA TAREFA
+
+   Agrupa o título e as informações
+   adicionais da tarefa.
+========================================== */
+
+.task-content {
+
+  /* Min Width = Largura mínima
+
+     Permite que o texto diminua
+     corretamente em telas menores.
+  */
+  min-width: 0;
+
+}
+
+/* ==========================================
+   TÍTULO DA TAREFA
+========================================== */
+
+.task-title {
+
+  /* Display = Define como o elemento será exibido */
+  display: block;
+
+  /* Overflow Wrap = Quebra palavras muito longas
+
+     Evita que textos grandes
+     ultrapassem o card.
+  */
+  overflow-wrap: anywhere;
+
+  /* Font Weight = Espessura da fonte */
+  font-weight: 800;
+
+}
+
+/* ==========================================
+   INFORMAÇÕES DA TAREFA
+
+   Exibe prioridade e prazo.
+========================================== */
+
+.task-meta {
+
+  /* Margin Top = Espaçamento externo superior */
+  margin-top: 7px;
+
+  /* Display = Define como o elemento será exibido */
+  display: flex;
+
+  /* Gap = Espaço entre os elementos */
+  gap: 8px;
+
+  /* Flex Wrap = Permite quebrar
+     para a próxima linha quando necessário.
+  */
+  flex-wrap: wrap;
+
+  /* Color = Cor do texto */
+  color: var(--muted);
+
+  /* Font Size = Tamanho da fonte */
+  font-size: .82rem;
+
+}
+
+/* ==========================================
+   BADGE
+
+   Pequeno indicador utilizado para
+   exibir a prioridade da tarefa.
+========================================== */
+
+.badge {
+
+  /* Padding = Espaçamento interno */
+  padding: 4px 8px;
+
+  /* Border Radius = Arredondamento dos cantos
+
+     999px cria um formato de cápsula.
+  */
+  border-radius: 999px;
+
+  /* Background = Cor de fundo */
+  background: #eef2f7;
+
+  /* Font Weight = Espessura da fonte */
+  font-weight: 800;
+
+}
+
+/* ==========================================
+   PRIORIDADE ALTA
+========================================== */
+
+.badge.alta {
+
+  /* Color = Cor do texto */
+  color: var(--danger);
+
+  /* Background = Cor de fundo */
+  background: #fdecea;
+
+}
+
+/* ==========================================
+   PRIORIDADE MÉDIA
+========================================== */
+
+.badge.media {
+
+  /* Color = Cor do texto */
+  color: var(--warning);
+
+  /* Background = Cor de fundo */
+  background: #fff7df;
+
+}
+
+/* ==========================================
+   PRIORIDADE BAIXA
+========================================== */
+
+.badge.baixa {
+
+  /* Color = Cor do texto */
+  color: var(--success);
+
+  /* Background = Cor de fundo */
+  background: #e8f4f1;
+
+}
+
+/* ==========================================
+   AÇÕES DA TAREFA
+
+   Organiza os botões de editar
+   e excluir.
+========================================== */
+
+.task-actions {
+
+  /* Display = Define como o elemento será exibido */
+  display: flex;
+
+  /* Gap = Espaço entre os botões */
+  gap: 8px;
+
+}
+
+/* ==========================================
+   ESTADO VAZIO
+
+   Exibido quando não existe
+   nenhuma tarefa cadastrada.
+========================================== */
+
+.empty-state {
+
+  /* Display = Define como o elemento será exibido
+
+     None mantém o componente oculto.
+  */
+  display: none;
+
+  /* Margin Top = Espaçamento externo superior */
+  margin-top: 18px;
+
+  /* Padding = Espaçamento interno */
+  padding: 32px 20px;
+
+  /* Border = Borda tracejada */
+  border: 1px dashed #b8c4d4;
+
+  /* Border Radius = Arredondamento dos cantos */
+  border-radius: 8px;
+
+  /* Text Align = Alinhamento do texto */
+  text-align: center;
+
+  /* Color = Cor do texto */
+  color: var(--muted);
+
+}
+
+/* ==========================================
+   TÍTULO DO ESTADO VAZIO
+========================================== */
+
+.empty-state strong {
+
+  /* Display = Define como o elemento será exibido */
+  display: block;
+
+  /* Color = Cor do texto */
+  color: var(--text);
+
+  /* Margin Bottom = Espaçamento externo inferior */
+  margin-bottom: 6px;
+
+}
+
+/* ==========================================
+   ESTADO VAZIO VISÍVEL
+
+   Exibe a mensagem quando
+   não existem tarefas.
+========================================== */
+
+.empty-state.visible {
+
+  /* Display = Define como o elemento será exibido */
+  display: block;
+
+}
+
+/* ==========================================
+   RESPONSIVIDADE - TABLET
+
+   Ajusta o layout para telas com
+   largura de até 860 pixels.
+========================================== */
+
+@media (max-width: 860px) {
+
+  .app-shell {
+
+    /* Grid Template Columns = Define as colunas
+
+       1fr faz com que exista apenas
+       uma coluna ocupando toda a largura.
+    */
+    grid-template-columns: 1fr;
+
+  }
+
+  .hero-panel {
+
+    /* Min Height = Altura mínima */
+    min-height: 280px;
+
+  }
+
+  .task-form {
+
+    /* Grid Template Columns = Reorganiza
+       os campos do formulário em
+       duas colunas.
+    */
+    grid-template-columns: 1fr 1fr;
+
+  }
+
+  .task-title-field,
+  .primary-button {
+
+    /* Grid Column = Define quantas
+       colunas o elemento ocupa.
+
+       1 / -1 faz o elemento ocupar
+       toda a largura do Grid.
+    */
+    grid-column: 1 / -1;
+
+  }
+
+}
+
+/* ==========================================
+   RESPONSIVIDADE - CELULAR
+
+   Ajusta o layout para telas com
+   largura de até 560 pixels.
+========================================== */
+
+@media (max-width: 560px) {
+
+  .app-shell {
+
+    /* Width = Largura
+
+   Min = Utiliza o menor valor.
+
+   Calc = Realiza um cálculo matemático.
+*/
+    width: min(100% - 20px, 1120px);
+
+    /* Padding = Espaçamento interno */
+    padding: 10px 0;
+
+  }
+
+  .hero-panel,
+  .task-panel {
+
+    /* Padding = Espaçamento interno */
+    padding: 18px;
+
+  }
+
+  .task-form,
+  .stats-grid {
+
+    /* Grid Template Columns = Organiza
+       todos os elementos em uma
+       única coluna.
+    */
+    grid-template-columns: 1fr;
+
+  }
+
+  .compact-field,
+  .primary-button {
+
+    /* Grid Column = Retorna ao
+       comportamento padrão do Grid.
+    */
+    grid-column: auto;
+
+  }
+
+  .toolbar {
+
+    /* Display = Define como o elemento será exibido
+
+       Grid facilita a reorganização
+       dos elementos em telas menores.
+    */
+    display: grid;
+
+  }
+
+  .filters {
+
+    /* Overflow X = Controla o conteúdo
+       que ultrapassa a largura.
+
+       Auto adiciona rolagem horizontal
+       quando necessário.
+    */
+    overflow-x: auto;
+
+  }
+
+  .task-item {
+
+    /* Grid Template Columns = Reorganiza
+       os elementos do card da tarefa.
+    */
+    grid-template-columns: auto 1fr;
+
+  }
+
+  .task-actions {
+
+    /* Grid Column = Posiciona os botões
+       na segunda coluna do Grid.
+    */
+    grid-column: 2;
+
+  }
+
 }

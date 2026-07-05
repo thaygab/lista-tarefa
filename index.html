@@ -1,24 +1,223 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
+  <!-- ==============================
+       CONFIGURAÇÕES DA PÁGINA
+  =============================== -->
+
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Lista de Tarefas</title>
+
+  <!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Arquivo de estilos -->
   <link rel="stylesheet" href="style.css">
+  
 </head>
+
 <body>
 
-  <div class="container">
-    <h1>Minha Lista de Tarefas</h1>
+  <!-- ==============================
+       CONTAINER PRINCIPAL
+  =============================== -->
 
-    <div class="input-area">
-      <input type="text" id="tarefaInput" placeholder="Digite uma tarefa">
-      <button onclick="adicionarTarefa()">Adicionar</button>
-    </div>
+  <main class="app-shell">
 
-    <ul id="lista"></ul>
-  </div>
+    <!-- ==============================
+         PAINEL DE APRESENTAÇÃO
+    =============================== -->
+
+    <section class="panel hero-panel" aria-labelledby="titulo-app">
+
+      <div>
+        <p class="eyebrow">Organizador diário</p>
+
+        <h1 id="titulo-app">
+          Lista de tarefas
+        </h1>
+
+        <p class="subtitle">
+          Planeje, priorize e acompanhe o que precisa sair do papel.
+        </p>
+      </div>
+
+      <!-- ==============================
+     CARD DE PROGRESSO
+================================ -->
+
+      <!-- Card de progresso das tarefas -->
+      <div class="progress-card" aria-label="Progresso das tarefas">
+
+        <div class="progress-text">
+          <span id="progressLabel">0% concluido</span>
+          <strong id="doneCount">0/0</strong>
+        </div>
+
+        <div class="progress-track">
+          <span id="progressBar"></span>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ==============================
+         PAINEL DE GERENCIAMENTO
+    =============================== -->
+
+    <section class="panel task-panel" aria-label="Gerenciador de tarefas">
+
+      <!-- ==============================
+           FORMULÁRIO
+      =============================== -->
+
+      <form id="taskForm" class="task-form">
+
+        <!-- Campo da tarefa -->
+        <div class="field task-title-field">
+
+          <label for="taskInput">Nova tarefa</label>
+
+          <input
+            type="text"
+            id="taskInput"
+            placeholder="Ex: Revisar proposta"
+            autocomplete="off"
+            required>
+
+        </div>
+
+        <!-- Campo de prioridade -->
+        <div class="field compact-field">
+
+          <label for="priorityInput">Prioridade</label>
+
+          <select id="priorityInput">
+            <option value="baixa">Baixa</option>
+            <option value="media" selected>Média</option>
+            <option value="alta">Alta</option>
+          </select>
+
+        </div>
+
+        <!-- Campo de prazo -->
+        <div class="field compact-field">
+
+          <label for="dateInput">Prazo</label>
+
+          <input type="date" id="dateInput">
+
+        </div>
+
+        <!-- Botão para adicionar -->
+        <button type="submit" class="primary-button">
+          Adicionar
+        </button>
+
+      </form>
+
+      <!-- ==============================
+           FILTROS E AÇÕES
+      =============================== -->
+
+      <div class="toolbar">
+
+        <div class="filters" aria-label="Filtros da lista">
+
+          <button
+            type="button"
+            class="filter-button active"
+            data-filter="todas">
+            Todas
+          </button>
+
+          <button
+            type="button"
+            class="filter-button"
+            data-filter="pendentes">
+            Pendentes
+          </button>
+
+          <button
+            type="button"
+            class="filter-button"
+            data-filter="concluidas">
+            Concluídas
+          </button>
+
+        </div>
+
+        <button
+          type="button"
+          id="clearCompleted"
+          class="ghost-button">
+          Limpar concluídas
+        </button>
+
+      </div>
+
+      <!-- ==============================
+           ESTATÍSTICAS
+      =============================== -->
+
+      <div class="stats-grid" aria-label="Resumo das tarefas">
+
+        <article>
+          <span>Total</span>
+          <strong id="totalTasks">0</strong>
+        </article>
+
+        <article>
+          <span>Pendentes</span>
+          <strong id="pendingTasks">0</strong>
+        </article>
+
+        <article>
+          <span>Alta prioridade</span>
+          <strong id="highPriorityTasks">0</strong>
+        </article>
+
+      </div>
+
+      <!-- ==============================
+           LISTA DE TAREFAS
+      =============================== -->
+
+      <ul id="taskList" class="task-list"></ul>
+
+      <!-- ==============================
+           MENSAGEM QUANDO NÃO HÁ TAREFAS
+      =============================== -->
+
+      <div id="emptyState" class="empty-state">
+
+        <strong>
+          Nenhuma tarefa por aqui
+        </strong>
+
+        <span>
+          Adicione uma tarefa para começar.
+        </span>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ==============================
+       JAVASCRIPT
+  =============================== -->
 
   <script src="script.js"></script>
+
 </body>
+
 </html>
